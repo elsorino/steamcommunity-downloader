@@ -12,7 +12,7 @@ args = parser.parse_args()
 url = args.profile
 
 if "steamcommunity" in url:
-    url +="allcomments?ctp="
+    url +="/allcomments?ctp="
 else:
     print("\nInvalid url entered, exiting")
     quit()
