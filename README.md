@@ -11,7 +11,7 @@ Script I made while learning Python
 
 ### Usage
 
-`./steam-comments.py -p https://steamcommunity.com/id/ChetFaliszek/allcomments -p 2 -o example.txt`
+`./steam-comments.py -p https://steamcommunity.com/id/ChetFaliszek/allcomments -n 2 -o example.txt`
 
 Profile must be public(for now)
 
