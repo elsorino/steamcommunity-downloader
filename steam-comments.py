@@ -31,5 +31,5 @@ while currentnumber <= pagenumbers:
 
     for all in steam_elems:
         test = re.sub(r'([\r\n\t])+', r'\n', all.text) #Removes a bunch of blank lines
-        print(test, file=open(args.output,"a+"))
+        print(test.strip(), file=open(args.output,"a+", encoding='utf-8')) #utf-8 encoding is required on windows
     currentnumber += 1
