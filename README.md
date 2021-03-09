@@ -11,20 +11,10 @@ Script I made while learning Python
 
 ### Usage
 
-<<<<<<< HEAD
-`./steam-comments.py -p https://steamcommunity.com/id/ChetFaliszek/allcomments -n 2 -o example.txt`
-=======
-`./steam-comments.py -p https://steamcommunity.com/id/ChetFaliszek/ -p 2 -o example.txt`
->>>>>>> 512c8bf (Added support for steam groups)
+`./steam-comments.py -p https://steamcommunity.com/id/ChetFaliszek/ -n 2 -o example.txt`
 
 Profile must be public(for now)
 
 TODO:
-
 * Support private profiles
-<<<<<<< HEAD
 * Support steam group comments
-* Support steam emotes. Currently emotes are blanked out
-=======
-* Support steam emotes. Currently emotes are blanked out
->>>>>>> 512c8bf (Added support for steam groups)
