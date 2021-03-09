@@ -17,4 +17,4 @@ Profile must be public(for now)
 
 TODO:
 * Support private profiles
-* Support steam group comments
+* Support steam emotes. Currently emotes are blanked out
