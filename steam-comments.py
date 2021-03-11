@@ -5,11 +5,12 @@ import argparse
 from bs4 import BeautifulSoup
 
 parser = argparse.ArgumentParser()
-parser.add_argument("-p", "--profile", required=True, help = "URL of steam profile or group to use")
-parser.add_argument("-n", "--numbers", required=True, help = "Number of comment pages to use")
+parser.add_argument("-u", "--url", required=True, help = "URL of steam profile or group to use")
+parser.add_argument("-n", "--numbers", required=True, help = "Number of comment pages to download")
 parser.add_argument("-o", "--output", required=True, help = "File to direct output")
+parser.add_argument("--html", action='store_true', help = "Enables HTML output for emotes/urls")
 args = parser.parse_args()
-url = args.profile
+url = args.url
 
 if "steamcommunity" in url:
     url +="/allcomments?ctp="
@@ -25,9 +26,10 @@ while currentnumber <= pagenumbers:
     page = requests.get(currentpage)
     soup = BeautifulSoup(page.content, 'html.parser')
     results = soup.find('div', class_='commentthread_comment_container') #Where all comments are located
-    steam_elems = results.find_all('div', class_='commentthread_comments') #Finds all comments
-
-    for all in steam_elems:
-        test = re.sub(r'([\r\n\t])+', r'\n', all.text) #Removes a bunch of blank lines
-        print(test.strip(), file=open(args.output,"a+", encoding='utf-8')) #utf-8 encoding is required on windows
-    currentnumber += 1
+    if args.html:
+        print(results, file=open(args.output,"a+", encoding='utf-8')) #utf-8 encoding is required on windows
+        currentnumber += 1
+    else:
+        finaltext = re.sub(r'([\r\n\t])+', r'\n', results.text) #Removes a bunch of blank lines
+        print(finaltext.strip(), file=open(args.output,"a+", encoding='utf-8')) 
+        currentnumber += 1
