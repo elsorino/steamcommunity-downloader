@@ -1,5 +1,5 @@
-# steam-comments
-Imports comments from a user's steam profile
+# steamcommunity-downloader
+Download various things from steam community
 
 Script I made while learning Python
 
@@ -11,13 +11,20 @@ Script I made while learning Python
 
 ### Usage
 
-`./steam-comments.py -u https://steamcommunity.com/id/ChetFaliszek/ -n 2 -o example.txt`
+For steam comments, do:
 
-Optionally, use `--html` to enable html output for steam emotes & profile links of commenters 
+`./stcommunity.py --comments -u https://steamcommunity.com/id/ChetFaliszek/ -n 2 -o example.txt`
 
-Profile must be public(for now)
+This also supports group urls for group comments.
+
+For group announcements, replace `--comments` with `--announcements`
+
+Optionally, use `--html` to enable html output for steam emotes & profile links of commenters. 
+
+Profiles must be public(for now)
 
 TODO:
 
 * Support private profiles
 * Improve format of HTML output with auto resolving of vanity URLs
+* Support more steam group stuff incl. events,  comments on announcements, discussions, hidden announcements
