@@ -1,5 +1,5 @@
 # steamcommunity-downloader
-Download various things from steam community
+Export things such as comments from Steam community
 
 Script I made while learning Python
 
