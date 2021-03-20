@@ -8,9 +8,8 @@ parser = argparse.ArgumentParser()
 parser.add_argument("-u", "--url", required=True, help = "URL of steam profile or group to use")
 parser.add_argument("-n", "--numbers", required=True, help = "Number of comment pages to download")
 parser.add_argument("-o", "--output", required=True, help = "File to direct output")
-parser.add_argument("--html", action='store_true', help = "Enables HTML output for emotes/urls")
+parser.add_argument( "--html", action='store_true', help = "Enables HTML output for emotes/urls")
 parser.add_argument("--announcements", action='store_true', help = "Download announcements on a steam group")
-parser.add_argument("--comments", action='store_true', help = "Download comments off a profile/group")
 args = parser.parse_args()
 url = args.url
 
@@ -37,7 +36,7 @@ if args.announcements:
                 test = re.sub(r'([\r\n\t])+', r'\n', all.text) #Removes a bunch of blank lines
                 print(test.strip(), file=open(args.output,"a+", encoding='utf-8'))
             currentnumber += 1
-elif args.comments:
+else:
     if "steamcommunity.com/id/" in url:
         url +="/allcomments?ctp="
     else:
@@ -55,6 +54,3 @@ elif args.comments:
             finaltext = re.sub(r'([\r\n\t])+', r'\n', comresults.text) 
             print(finaltext.strip(), file=open(args.output,"a+", encoding='utf-8')) 
             currentnumber += 1
-else:
-    print("Invalid page entered, exiting")
-    quit()
