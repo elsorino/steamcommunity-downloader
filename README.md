@@ -8,23 +8,25 @@ Script I made while learning Python
 * Python3
   * BeautifulSoup4
   * Requests
+  * SteamID
 
 ### Usage
 
 For steam comments, do:
 
-`./stcommunity.py --comments -u https://steamcommunity.com/id/ChetFaliszek/ -n 2 -o example.txt`
+`./stcommunity.py -u https://steamcommunity.com/id/ChetFaliszek/ -n 2 -o example.txt`
 
 This also supports group urls for group comments.
 
-For group announcements, replace `--comments` with `--announcements`
+For group announcements, use `--announcements`
 
-Optionally, use `--html` to enable html output for steam emotes & profile links of commenters. 
+Optionally, use `--html` to enable html output for steam emotes & profile links.
 
 Profiles must be public(for now)
+
+This does however, work on community banned profiles.
 
 TODO:
 
 * Support private profiles
-* Improve format of HTML output with auto resolving of vanity URLs
 * Support more steam group stuff incl. events,  comments on announcements, discussions, hidden announcements
