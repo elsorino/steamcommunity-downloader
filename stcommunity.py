@@ -91,20 +91,28 @@ if args.announcements:
         quit()
     while currentnumber <= pagenumbers:
         currentpage = url + str(currentnumber)
+        print("Downloading page",currentnumber)
         page = requests.get(currentpage)
         soup = BeautifulSoup(page.content, 'html.parser')
         announceresults = soup.find_all('div', class_='announcement') #Preferred not to use find_all, but there was no better way
         if args.html:
-            for all in announceresults:
-                print(all, file=open(args.output,"a+", encoding='utf-8')) #utf-8 encoding is required on windows
-                currentnumber += 1
+            output_lines = [] #Gotta reset the list on every page
+            urls = re.findall('https:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+', str(announceresults))
+            #The following is very inefficent, it has no duplication detection.
+            for found in urls:
+                id64 = SteamID.from_url(found)
+                urlf = re.sub(r'id\/[a-zA-Z0-9]+', r'profiles/%s' % id64, found, re.MULTILINE)
+                output_lines.append(urlf)
+            test = re.sub('https://steamcommunity.com\/id\/[a-zA-Z0-9]+', lambda _: output_lines.pop(0), str(announceresults), len(output_lines) or -1)
+            print(test.strip(), file=open(args.output,"a+", encoding='utf-8')) 
+            currentnumber += 1
         else:
             for all in announceresults:
                 test = re.sub(r'([\r\n\t])+', r'\n', all.text) #Removes a bunch of blank lines
                 print(test.strip(), file=open(args.output,"a+", encoding='utf-8'))
             currentnumber += 1
 else:
-    if "steamcommunity.com/id/" in url:
+    if "steamcommunity.com/" in url:
         url +="/allcomments?ctp="
     else:
         print("\nInvalid url entered, exiting")
@@ -120,11 +128,8 @@ else:
             urls = re.findall('https:\/\/steamcommunity\.com\/id\/[a-zA-Z0-9]+', str(comresults))
             #The following is very inefficent, it has no duplication detection.
             for found in urls:
-                #print(found)
                 id64 = SteamID.from_url(found)
-                #print(id64)
                 urlf = re.sub(r'id\/[a-zA-Z0-9]+', r'profiles/%s' % id64, found, re.MULTILINE)
-                #print(urlf)
                 output_lines.append(urlf)
             test = re.sub('https://steamcommunity.com\/id\/[a-zA-Z0-9]+', lambda _: output_lines.pop(0), str(comresults), len(output_lines) or -1)
             print(test.strip(), file=open(args.output,"a+", encoding='utf-8')) 
